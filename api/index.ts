@@ -1,8 +1,10 @@
-import express, { Express, Response } from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+
+import { connection } from './database/connection.ts';
 
 dotenv.config();
 
@@ -23,10 +25,14 @@ app.use(morgan('tiny'))
 app.disable('x-powered-by');
 
 //routes
-app.get("/", (res: Response): void => {
- console.log("Hello World")
- res.send("Hello World");
-})
+
+
+
+try {
+ connection()
+} catch(err: any) {
+  console.log(err);
+}
 
 
 export default app;
