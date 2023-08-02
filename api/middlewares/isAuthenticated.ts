@@ -26,11 +26,7 @@ export const isAuthenticated = async (req: RequestWithMember, res: Response, nex
     const { _id } = decoded;
 
     await Member.findOne({ _id }, (err: any, member: Member) => {
-      if (err) {
-        return res.status(400).json({ err, message: "Please log in to Keikaku first" });
-      }
-
-      if (!member) {
+      if (err || !member) {
         return res.status(400).json({ err, message: "Please log in to Keikaku first" });
       }
 
