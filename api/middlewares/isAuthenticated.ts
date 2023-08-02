@@ -1,27 +1,44 @@
-import { Request, Response, NextFunction} from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Member } from '../models/Member.ts';
 
-export const isAuthenticated = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-
- const { authorization } = req.headers;
-
- if (!authorization) {
-  return res.status(401).json({ error: "You must log in first to Keikaku!" });
- }
-
- const token: string = authorization.replace("Bearer ", "");
-
- jwt.verify(token, process.env.JWT_SECRET, (err: Error, payload: any) => {
-  if (err) {
-   return res.status(401).json({ error: "You must log in first to Keikaku!" });
-  }
-
-  const { _id: number } = payload;
-
-  Member.findOne({ _id: number }).then((userData: any) => {
-   next();
-  })
- })
-
+// utilizing the JwtPayload by interfacing it with a new TokenPayload interface
+interface TokenPayload extends JwtPayload {
+  _id: string;
 }
+
+interface RequestWithMember extends Request {
+  member: Member;
+}
+
+export const isAuthenticated = async (req: RequestWithMember, res: Response, next: NextFunction): Promise<any> => {
+  const { authorization } = req.headers;
+
+  try {
+    if (!authorization) {
+      return res.status(401).json({ error: "You must log in first to Keikaku!" });
+    }
+
+    const token: string = authorization.replace("Bearer ", "");
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as TokenPayload;
+
+    const { _id } = decoded;
+
+    await Member.findOne({ _id }, (err: any, member: Member) => {
+      if (err) {
+        return res.status(400).json({ err, message: "Please log in to Keikaku first" });
+      }
+
+      if (!member) {
+        return res.status(400).json({ err, message: "Please log in to Keikaku first" });
+      }
+
+      req.member = member;
+    });
+
+    next();
+  } catch (err) {
+    return res.status(400).json({ err, message: "Please log in to Keikaku first" });
+  }
+};
