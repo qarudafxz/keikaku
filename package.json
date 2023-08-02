@@ -13,7 +13,8 @@
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.18",
