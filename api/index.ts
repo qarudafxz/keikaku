@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 
 import { connection } from './database/connection.ts';
 
+import { taskRoute } from './routers/taskRoute.ts';
+
 dotenv.config();
 
 const app: Express = express();
@@ -25,7 +27,7 @@ app.use(morgan('tiny'))
 app.disable('x-powered-by');
 
 //routes
-
+app.use('/task', taskRoute);
 
 
 try {
