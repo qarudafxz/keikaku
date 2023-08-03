@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 
 import { connection } from './database/connection.ts';
 
+//routes
+import { authRoute } from './routers/authRoute.ts';
 import { taskRoute } from './routers/taskRoute.ts';
 
 dotenv.config();
@@ -28,7 +30,7 @@ app.disable('x-powered-by');
 
 //routes
 app.use('/task', taskRoute);
-
+app.use('/auth', authRoute);
 
 try {
  connection()

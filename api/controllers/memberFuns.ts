@@ -5,7 +5,7 @@ import { Room } from '../models/Room.ts';
 export const addMemberToRoom = async(req: Request, res: Response):Promise<any> => {
  const { id } = req.body;
  try {
-  const member = await Member.findOne({ _id: id });
+  const member: typeof Member | null = await Member.findOne({ _id: id });
 
   if(!member) {
    return res.status(400).json({ error: "Member not found" });
