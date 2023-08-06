@@ -14,7 +14,6 @@ type Room = {
 }
 
 type Task = {
- _id: string,
  task_creator: string,
  member_id: string,
  room_id: string,
