@@ -9,7 +9,9 @@ const Home: React.FC = () => {
     }
   },[])
   return (
-    <div>Keikaku</div>
+    <div>
+      <h1>Keikaku | Task Management System</h1>
+    </div>
   )
 }
 
