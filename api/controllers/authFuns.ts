@@ -65,6 +65,7 @@ export const login = async(req: Request, res: Response):Promise<any> => {
  }
 }
 
+//get credentials
 export const getCreds = async (req: Request, res: Response): Promise<any> => {
  const { id } = req.params;
  try {
