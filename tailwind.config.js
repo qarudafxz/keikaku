@@ -20,10 +20,12 @@ export default {
 			colors: {
 				primary: "#000",
 				secondary: "#FFF",
+				main: "#6934FF",
 			},
 			backgroundColor: {
 				primary: "#000",
 				secondary: "#FFF",
+				main: "#6934FF",
 			},
 		},
 	},

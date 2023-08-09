@@ -69,7 +69,7 @@ export const login = async(req: Request, res: Response):Promise<any> => {
 export const getCreds = async (req: Request, res: Response): Promise<any> => {
  const { id } = req.params;
  try {
-  const member: Member | null = await Member.findById(id ?? req.params.id);
+  const member: typeof Member | null = await Member.findById(id ?? req.params.id);
 
   if(!member) {
    return res.status(400).json({ message: "Member not found"})

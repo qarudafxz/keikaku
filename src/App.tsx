@@ -6,11 +6,13 @@ import Home from './pages/Home'
 
 const App: FC = () => {
   return (
-   <Router>
+  
+    <Router>
     <Routes>
       <Route path="/" element={<Home />} />
     </Routes>
    </Router>
+
   )
 }
 
