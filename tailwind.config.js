@@ -6,6 +6,7 @@ export default {
 			fontFamily: {
 				headers: ["Inter", "sans-serif"],
 				body: ["Manjari", "sans-serif"],
+				title: ["Kaisei Tokumin", "sans-serif"],
 			},
 			screens: {
 				xxxxs: "275px",
